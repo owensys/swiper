@@ -1291,7 +1291,8 @@ Like `locate-dominating-file', but DIR defaults to
 (defun counsel-git-cands (dir)
   (let ((default-directory dir))
     (split-string
-     (shell-command-to-string counsel-git-cmd)
+     ;; fix windows encoding
+     (decode-coding-string (shell-command-to-string counsel-git-cmd) 'utf-8)
      "\0"
      t)))
 
